@@ -2,24 +2,29 @@
 
 namespace App\Jobs;
 
+use App\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 
-class SendVrificationCodeJob implements ShouldQueue
+class SendVerificationCodeJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    /**
+     * @var User
+     */
+    private $user;
 
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(User $user)
     {
-        //
+        $this->user = $user;
     }
 
     /**
@@ -29,6 +34,7 @@ class SendVrificationCodeJob implements ShouldQueue
      */
     public function handle()
     {
-        //
+        sleep(7);
+        var_dump("User '". $this->user->name . "' created.");
     }
 }

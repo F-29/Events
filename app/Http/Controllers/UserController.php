@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Events\RegisterUserEvent;
+//use App\Events\RegisterUserEvent;
 use App\Http\Requests\user\CreateRequest;
 use App\Http\Requests\user\UpdateRequest;
+use App\Http\Resources\UserResource;
 use App\Http\Resources\UserResourceCollection;
+use App\Jobs\SendVerificationCodeJob;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -46,12 +48,12 @@ class UserController extends Controller
             'password' => bcrypt((string)$request->password),
         ]);
 //        event(new RegisterUserEvent($user));
-
+        SendVerificationCodeJob::dispatch($user);
         return $user;
     }
 
     /**
-     * @param Request $request
+     * @param UpdateRequest $request
      * @param int $id
      * @return \Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      */
