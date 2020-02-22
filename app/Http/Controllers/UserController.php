@@ -45,7 +45,7 @@ class UserController extends Controller
             'email' => $request->email,
             'password' => bcrypt((string)$request->password),
         ]);
-        event(new RegisterUserEvent($user));
+//        event(new RegisterUserEvent($user));
 
         return $user;
     }
