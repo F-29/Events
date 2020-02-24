@@ -9,7 +9,7 @@ use App\Http\Resources\UserResource;
 use App\Http\Resources\UserResourceCollection;
 use App\Jobs\SendVerificationCodeJob;
 use App\User;
-use Illuminate\Http\Request;
+//use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
@@ -48,7 +48,18 @@ class UserController extends Controller
             'password' => bcrypt((string)$request->password),
         ]);
 //        event(new RegisterUserEvent($user));
-        SendVerificationCodeJob::dispatch($user);
+        SendVerificationCodeJob::dispatch($user)
+            ->onQueue('default')
+            ->delay(now()->addMinutes(1));
+
+        SendVerificationCodeJob::dispatch($user)
+            ->onQueue('xyz')
+            ->delay(now()->addMinutes(2));
+
+        SendVerificationCodeJob::dispatch($user)
+            ->onQueue('ddd')
+            ->delay(now()->addMinutes(3));
+
         return $user;
     }
 

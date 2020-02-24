@@ -34,7 +34,7 @@ class SendVerificationCodeJob implements ShouldQueue
      */
     public function handle()
     {
-        sleep(7);
+        sleep(4);
         var_dump("User '". $this->user->name . "' created.");
     }
 }
