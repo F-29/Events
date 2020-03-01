@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers;
 
-//use App\Events\RegisterUserEvent;
 use App\Http\Requests\user\CreateRequest;
 use App\Http\Requests\user\UpdateRequest;
 use App\Http\Resources\UserResource;
 use App\Http\Resources\UserResourceCollection;
 use App\Jobs\SendVerificationCodeJob;
 use App\User;
-//use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
